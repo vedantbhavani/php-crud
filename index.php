@@ -9,11 +9,11 @@ $database = "vsdata";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn) {
-    die("<br>Sorry we are connecting to fail: " . mysqli_connect_error($conn));
+    die("<br>Sorry we are connecting to fail: ");
 } else {
     if (isset($_GET['delete'])) {
         $sno = $_GET['delete'];
-        $sql = "DELETE FROM notes WHERE `notes`.`sno` = $sno";
+        $sql = "DELETE FROM notes WHERE `sno` = $sno";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $deleted = true;
@@ -53,7 +53,6 @@ if (!$conn) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project-01 CRUD with php </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css">
 </head>
 
 <body>
@@ -66,7 +65,7 @@ if (!$conn) {
                     <h1 class="modal-title fs-5" id="editModalLabel">Edit the Note</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="post" action="/crud/index.php">
+                <form method="post" action="/php-crud/index.php">
                     <div class="modal-body">
                         <input type="hidden" name="snoEdit" id="snoEdit">
                         <div class="mb-3">
@@ -138,7 +137,7 @@ if (!$conn) {
     <!-- Form start here -->
     <div class="container mt-3" style="width: 65%">
         <h2 class="text-center">Welcome to the VS-Notes</h2>
-        <form method="post" action="/crud/index.php">
+        <form method="post" action="/php-crud/index.php">
             <div class="mb-3">
                 <label for="title" class="form-label">Notes Title</label>
                 <input type="text" name="title" placeholder="Enter Title" class="form-control" id="title"
@@ -181,16 +180,12 @@ if (!$conn) {
         </table>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
@@ -218,14 +213,13 @@ if (!$conn) {
             sno = e.target.id.substr(1, );
             if (confirm("Are you sure want to delete this note ?")) {
                 console.log("yes");
-                window.location = `/crud/index.php?delete=${sno}`
+                window.location = `/php-crud/index.php?delete=${sno}`
             } else {
                 console.log("no");
             }
         })
     })
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
